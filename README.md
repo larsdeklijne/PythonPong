@@ -1,2 +1,2 @@
 # PythonPong
-first game made with PyGame library
+Eerste game die ik gemaakt heb met behulp van PyGame
