@@ -23,10 +23,7 @@ def player_animation():
         player.bottom = screen_height
 
 def opponent_animation():
-    if opponent.top < ball.y:
-        opponent.top += opponent_speed
-    if opponent.bottom > ball.y:
-        opponent.bottom -= opponent_speed
+    opponent.y += opponent_speed
     if opponent.top <= 0:
         opponent.top = 0
     if opponent.bottom >=screen_height:
@@ -57,10 +54,16 @@ opponent = pygame.Rect(10, screen_height/2 - 70, 10, 140)
 bg_color = pygame.Color('grey12')
 light_grey = (200,200,200)
 
+# game variabele
 ball_speed_x = 7 * random.choice((1,-1))
 ball_speed_y = 7 * random.choice((1,-1))
 player_speed = 0
-opponent_speed = 7
+opponent_speed = 0
+
+#tekst variabele
+player_score = 0
+opponent_score = 0
+game_font = pygame.font.Font("freesansbold.ttf",32)
 
 while True:
     for event in pygame.event.get():
@@ -68,11 +71,27 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN:
+
+            #opponent toetsenbord controls -> key loslaten
+            if event.key == pygame.K_s:
+                opponent_speed +=7
+            if event.key == pygame.K_w:
+                opponent_speed -=7
+
+            # player toetsenbord controls -> key loslaten
             if event.key == pygame.K_DOWN:
                 player_speed +=7
             if event.key == pygame.K_UP:
                 player_speed -=7
+
         if event.type == pygame.KEYUP:
+            #opponent toetsenbord controls -> key indrukken
+            if event.key == pygame.K_s:
+                opponent_speed -=7
+            if event.key == pygame.K_w:
+                opponent_speed +=7
+
+              # player toetsenbord controls -> key indrukken
             if event.key == pygame.K_DOWN:
                 player_speed -=7
             if event.key == pygame.K_UP:
